@@ -1,0 +1,5 @@
+*.pem
+dist
+*.tgz
+user@*
+.env
