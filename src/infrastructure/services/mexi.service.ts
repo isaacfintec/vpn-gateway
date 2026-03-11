@@ -31,7 +31,21 @@ export default class MexiService {
       Authorization: `Bearer ${this.http.config.token}`
     }
 
-    return this.http.get(`/api/v1/customers/validate?${stringParams}`, { headers })
+    return this.http.get(`/api/v1/customers/validate?${stringParams}`, {
+      headers
+    })
+  }
+
+  _commercial_houses(params) {
+    const stringParams = getQueryStringParams(params)
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.http.config.token}`
+    }
+
+    return this.http.get(`/api/v1/commercial_houses?${stringParams}`, {
+      headers
+    })
   }
 
   async prequalifier(params) {
@@ -51,6 +65,19 @@ export default class MexiService {
     const self = this
     try {
       const operation = self._validateCustomerExistence.bind(self, params)
+      return await retry(operation, {
+        retries: 2,
+        onFail: () => self.http.auth()
+      })
+    } catch (error) {
+      handleAPIError(error)
+    }
+  }
+
+  async commercial_houses(params) {
+    const self = this
+    try {
+      const operation = self._commercial_houses.bind(self, params)
       return await retry(operation, {
         retries: 2,
         onFail: () => self.http.auth()
@@ -288,11 +315,11 @@ export default class MexiService {
 
   async cancelCreditRequest(params) {
     try {
-      return await this.http.post('/microfinws/credit/cancelCreditRequest', params,{
+      return await this.http.post('/microfinws/credit/cancelCreditRequest', params, {
         headers: {
           'Content-Type': 'application/json',
           autorizacion: this.http.config.accessToken
-        },
+        }
       })
     } catch (error) {
       handleAPIError(error)
@@ -301,11 +328,11 @@ export default class MexiService {
 
   async credit(params) {
     try {
-      return await this.http.post('/microfinws/credit/credit', params,{
+      return await this.http.post('/microfinws/credit/credit', params, {
         headers: {
           'Content-Type': 'application/json',
           autorizacion: this.http.config.accessToken
-        },
+        }
       })
     } catch (error) {
       handleAPIError(error)
@@ -314,11 +341,37 @@ export default class MexiService {
 
   async creditRequestAuthorization(params) {
     try {
-      return await this.http.post('/microfinws/origination/creditRequestAuthorization', params,{
+      return await this.http.post('/microfinws/origination/creditRequestAuthorization', params, {
         headers: {
           'Content-Type': 'application/json',
           autorizacion: this.http.config.accessToken
-        },
+        }
+      })
+    } catch (error) {
+      handleAPIError(error)
+    }
+  }
+
+  async creditConsolidationExt(params) {
+    try {
+      return await this.http.post('/microfinws/origination/creditConsolidationExt', params, {
+        headers: {
+          'Content-Type': 'application/json',
+          autorizacion: this.http.config.accessToken
+        }
+      })
+    } catch (error) {
+      handleAPIError(error)
+    }
+  }
+
+  async creditConsolidationInt(params) {
+    try {
+      return await this.http.post('/microfinws/origination/creditConsolidationInt', params, {
+        headers: {
+          'Content-Type': 'application/json',
+          autorizacion: this.http.config.accessToken
+        }
       })
     } catch (error) {
       handleAPIError(error)

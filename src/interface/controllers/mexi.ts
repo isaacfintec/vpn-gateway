@@ -21,6 +21,9 @@ import creditUseCase from '../../application/useCases/credit'
 import cancelCreditRequestUseCase from '../../application/useCases/cancelCreditRequest'
 import creditRequestInquiryUseCase from '../../application/useCases/creditRequestInquiry'
 import creditRequestDataAgreementUseCase from '../../application/useCases/creditRequestDataAgreement'
+import creditConsolidationIntUseCase from '../../application/useCases/creditConsolidationInt'
+import creditConsolidationExtUseCase from '../../application/useCases/creditConsolidationExt'
+import commercial_housesUseCase from '../../application/useCases/comercial_houses'
 
 export async function creditReport(request, _reply) {
   const env = request.params?.env || 'qa'
@@ -40,79 +43,79 @@ export async function customerRegistration(request, _reply) {
   return response
 }
 
-export async function destinationAccounts (request, _reply) {
+export async function destinationAccounts(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await destinationAccountsUseCase(request.body, env)
   return response
 }
 
-export async function relationCustomerCompany (request, _reply) {
+export async function relationCustomerCompany(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await relationCustomerCompanyUseCase(request.body, env)
   return response
 }
 
-export async function savingsAccountAuthorization (request, _reply) {
+export async function savingsAccountAuthorization(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await savingsAccountAuthorizationUseCase(request.body, env)
   return response
 }
 
-export async function creditSimulator (request, _reply) {
+export async function creditSimulator(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await creditSimulatorUseCase(request.body, env)
   return response
 }
 
-export async function creditRequest (request, _reply) {
+export async function creditRequest(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await creditRequestUseCase(request.body, env)
   return response
 }
 
-export async function additionalServices (request, _reply) {
+export async function additionalServices(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await additionalServicesUseCase(request.body, env)
   return response
 }
 
-export async function socioEconomicInformation (request, _reply) {
+export async function socioEconomicInformation(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await socioEconomicInformationUseCase(request.body, env)
   return response
 }
 
-export async function reference (request, _reply) {
+export async function reference(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await referenceUseCase(request.body, env)
   return response
 }
 
-export async function paymentCapacity (request, _reply) {
+export async function paymentCapacity(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await paymentCapacityUseCase(request.body, env)
   return response
 }
 
-export async function creditRequestFile (request, _reply) {
+export async function creditRequestFile(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await creditRequestFileUseCase(request.body, env)
   return response
 }
 
-export async function instructionsDispersion (request, _reply) {
+export async function instructionsDispersion(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await instructionsDispersionUseCase(request.body, env)
   return response
 }
 
-export async function creditRequestFree (request, _reply) {
+export async function creditRequestFree(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await creditRequestFreeUseCase(request.body, env)
   return response
 }
 
-export async function validateCustomerExistence (request, _reply) {
+export async function validateCustomerExistence(request, _reply) {
   const env = request.params?.env || 'qa'
   const query = request.query
   const response = await validateCustomerExistenceUseCase({ ...query }, env)
@@ -127,7 +130,7 @@ export async function auth(request, _reply) {
 
 export async function customersInquiry(request, _reply) {
   const { customerId, env } = request.params
-  const response = await customersInquiryUseCase(customerId, env || 'qa' )
+  const response = await customersInquiryUseCase(customerId, env || 'qa')
   return response
 }
 
@@ -158,5 +161,23 @@ export async function creditRequestInquiry(request, _reply) {
 export async function creditRequestDataAgreement(request, _reply) {
   const env = request.params?.env || 'qa'
   const response = await creditRequestDataAgreementUseCase(request.query, env || 'qa')
+  return response
+}
+
+export async function creditConsolidationInt(request, _reply) {
+  const env = request.params?.env || 'qa'
+  const response = await creditConsolidationIntUseCase(request.body, env || 'qa')
+  return response
+}
+
+export async function creditConsolidationExt(request, _reply) {
+  const env = request.params?.env || 'qa'
+  const response = await creditConsolidationExtUseCase(request.body, env || 'qa')
+  return response
+}
+
+export async function commercial_houses(request, _reply) {
+  const env = request.params?.env || 'qa'
+  const response = await commercial_housesUseCase(request.query, env || 'qa')
   return response
 }
